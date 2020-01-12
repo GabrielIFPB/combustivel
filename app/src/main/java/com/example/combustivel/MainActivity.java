@@ -11,8 +11,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button btn_verificar;
+    private EditText input_gasolina;
+    private EditText input_alcool;
+    private TextView resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +29,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        this.btn_verificar = findViewById(R.id.id_btn_verificar);
+        this.input_alcool = findViewById(R.id.id_alcool);
+        this.input_gasolina = findViewById(R.id.id_gasolina);
+        this.resultado = findViewById(R.id.resultado);
+
+        this.btn_verificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                try {
+                    String alcool = input_alcool.getText().toString();
+                    String gasolina = input_gasolina.getText().toString();
+                    double valor_g = Double.parseDouble(gasolina);
+                    double valor_a = Double.parseDouble(alcool);
+                    if ((valor_a / valor_g) > 0.7)
+                        resultado.setText("Melhor usar gasolina!");
+                    else
+                        resultado.setText("Melhor usar álcool!");
+                } catch (NumberFormatException error) {
+                    System.out.println();
+                    System.out.println(error);
+                    System.out.println();
+                    resultado.setText("Não deixe de digitar os valores!");
+                }
+
             }
         });
+
     }
 
     @Override
