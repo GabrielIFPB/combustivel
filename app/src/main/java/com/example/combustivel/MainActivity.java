@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     String gasolina = input_gasolina.getText().toString();
                     double valor_g = Double.parseDouble(gasolina);
                     double valor_a = Double.parseDouble(alcool);
-                    if ((valor_a / valor_g) > 0.7)
-                        resultado.setText("Melhor usar gasolina!");
+                    if ((valor_a / valor_g) >= 0.7)
+                        resultado.setText("É melhor utilizar gasolina!");
                     else
-                        resultado.setText("Melhor usar álcool!");
+                        resultado.setText("É melhor utilizar álcool!");
                 } catch (NumberFormatException error) {
                     System.out.println();
                     System.out.println(error);
